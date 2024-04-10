@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import GuidelinesUpload from "@/components/guidelines-upload";
 import MedicalRecordUpload from "@/components/medical-record-upload";
 import { useRouter } from "next/navigation";
+import { postCase } from '../../connector/api';
 import "../../styles/dashboard.css"; // Assuming you're importing CSS from an external file
 
 const steps = [
@@ -31,19 +32,28 @@ export default function DashboardRoot() {
     }
   }, [hasMRPDFProcessed, hasGuidePDFProcessed]);
 
-  const handleContinue = () => {
-    setShowModal(true);
-    let currentStep = 0;
-    const intervalId = setInterval(() => {
-      if (currentStep < steps.length) {
-        setActiveStep(currentStep++);
-      } else {
-        clearInterval(intervalId);
-        // Navigate after the last step
-        setShowModal(false); // Hide modal before navigation for a smoother transition
-        router.push(`/dashboard/case/${CASE_ID}`);
-      }
-    }, 5000); // 5 seconds delay for each step
+  const handleContinue = async () => {
+    try {
+      // Calling the postCase function with the case ID.
+      await postCase();
+      setShowModal(true);
+      let currentStep = 0;
+      const intervalId = setInterval(() => {
+        if (currentStep < steps.length) {
+          setActiveStep(currentStep++);
+        } else {
+          clearInterval(intervalId);
+          // Navigate after the last step
+          setShowModal(false); // Hide modal before navigation for a smoother transition
+          router.push(`/dashboard/case/${CASE_ID}`);
+        }
+      }, 5000);
+      // 5 seconds delay for each step
+    } catch (error) {
+      // Handling errors that occur during the API call.
+      console.error('Error submitting the case:', error);
+      alert('Failed to submit the case');
+    }
   };
 
   const renderStep = (step, index) => {
@@ -75,14 +85,14 @@ export default function DashboardRoot() {
         </div>
       )}
       <div className="w-full flex flex-row gap-2 items-center">
-        <MedicalRecordUpload onPDFProcessed={setHasMRPDFProcessed} prepared={hasGuidePDFProcessed}/>
+        <MedicalRecordUpload onPDFProcessed={setHasMRPDFProcessed} prepared={hasGuidePDFProcessed} />
         <GuidelinesUpload onPDFProcessed={setHasGuidePDFProcessed} />
       </div>
       <div className="w-full py-4 flex flex-row justify-center">
         <button
           className={`font-medium py-2 px-4 rounded ${isContinueButtonDisabled ? "bg-gray-500 border-gray-500 text-white" : "bg-green-600 border-transparent text-white"}`}
           onClick={handleContinue}
-		  disabled={isContinueButtonDisabled}
+          disabled={isContinueButtonDisabled}
         >
           Continue
         </button>

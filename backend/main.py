@@ -26,6 +26,11 @@ mocked_responses = {
     Status.complete: "../assets/response-3.json"
 }
 
+# use this to keep status of server
+states = {
+    'case_891a_6fbl_87d1_4326': None
+}
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
@@ -55,6 +60,9 @@ async def get_case(case_id: str = Path(..., description="The ID of the case"),
 async def submit_case(data: dict = Body(...)):
     # mock data {"record": "<uuid>", "guideline":"uuid"}
     # TODO: add validation later
+    states = {
+      'case_891a_6fbl_87d1_4326': Status.submitted
+    }
     return {"message": "Case submitted successfully", "data": data}
 
 @app.get("/")
