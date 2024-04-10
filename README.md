@@ -1,42 +1,50 @@
-# health-insurance-complience
+# Health Insurance Compliance
 
-This demo application showcases the integration of Large Language Models (LLMs) in verifying the compliance between insurance policies and patient profiles. By automating the comparison process, it aids medical teams in swiftly determining eligibility for treatment. Leveraging advanced AI technology, the app enhances efficiency and accelerates decision-making in healthcare settings.
+## Overview
 
-Start time: 04/10/2024 10:00am EDT
-End time: 04/10/2024 3:00pm EDT
+This demo application demonstrates the integration of Large Language Models (LLMs) to verify compliance between insurance policies and patient profiles. It automates the comparison process, aiding medical teams in swiftly determining treatment eligibility. Leveraging advanced AI technology, this app enhances efficiency and accelerates decision-making in healthcare settings.
 
-## Note
+**Demo Duration:**
+- Start: April 10, 2024, 10:00 AM EDT
+- End: April 10, 2024, 3:00 PM EDT
 
-* backend
-    * GET http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted
-    * POST http://127.0.0.1:8000/case
-    ```
-    curl -X POST "http://127.0.0.1:8000/case" \ 
-     -H "Content-Type: application/json" \
-     -d '{"record": "123e4567-e89b-12d3-a456-426614174000", "guideline": "c56a4180-65aa-42ec-a945-5fd"}'
-    ```
-* frontend
-    * the case page will using progressive rendering (updated every 10s), please wait it's finally completed
+## Features
 
-## How to run backend
-   * active a python3 virtual enviroment and install dependences
-    *  `python3 -m virtualenv venv`
-    *  `source ./venv/bin/activate`
-    *  `pip -r requirements.txt`
-   * start the server
-    *  `uvicorn main:app`
+- **Backend:** Automates the compliance verification process using RESTful APIs.
+- **Frontend:** Utilizes progressive rendering to update the case page every 10 seconds for real-time compliance checking.
 
-## How to run frontend
+## Getting Started
+
+### Prerequisites
+
+- Python 3.x
+- pip
+- npm
+
+### Running the Backend
+
+1. Activate a Python 3 virtual environment and install dependencies:
+   ```shell
+   python3 -m venv venv
+   source ./venv/bin/activate
+   pip install -r requirements.txt
+   uvicorn main:app
+   ```
+   
+## Running frontend
   * `npm i .`
   * `npm run dev`
-
-## Test
-
   * Once open both service, open browswer `http://localhost:3000/`
 
 ## Unit test
 
-`pytest`
+Testing APIs
+GET http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted
+```shell
+curl -X POST "http://127.0.0.1:8000/case" \
+ -H "Content-Type: application/json" \
+ -d '{"record": "123e4567-e89b-12d3-a456-426614174000", "guideline": "c56a4180-65aa-42ec-a945-5fd"}'
+```
 
 ## Reference
 
