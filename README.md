@@ -43,6 +43,7 @@ Testing APIs
 1. ```shell
 curl -X GET "http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted"
 ```
+
 2. ```shell
 curl -X POST "http://127.0.0.1:8000/case" \
  -H "Content-Type: application/json" \
