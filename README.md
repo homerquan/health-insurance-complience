@@ -40,11 +40,13 @@ This demo application demonstrates the integration of Large Language Models (LLM
 
 Testing APIs
 
-1. ```shell
+1. GET /cast
+```shell
 curl -X GET "http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted"
 ```
 
-2. ```shell
+2. POST /case
+```shell
 curl -X POST "http://127.0.0.1:8000/case" \
  -H "Content-Type: application/json" \
  -d '{"record": "123e4567-e89b-12d3-a456-426614174000", "guideline": "c56a4180-65aa-42ec-a945-5fd"}'
