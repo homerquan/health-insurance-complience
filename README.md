@@ -34,13 +34,17 @@ This demo application demonstrates the integration of Large Language Models (LLM
 ## Running frontend
   * `npm i .`
   * `npm run dev`
-  * Once open both service, open browswer `http://localhost:3000/`
+  * Once open both backedn and frontend services, open browswer `http://localhost:3000/`
 
 ## Unit test
 
 Testing APIs
-GET http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted
-```shell
+
+1. ```
+http://127.0.0.1:8000/case/case_891a_6fbl_87d1_4326?status=submitted
+```
+
+2. ```shell
 curl -X POST "http://127.0.0.1:8000/case" \
  -H "Content-Type: application/json" \
  -d '{"record": "123e4567-e89b-12d3-a456-426614174000", "guideline": "c56a4180-65aa-42ec-a945-5fd"}'
